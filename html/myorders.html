@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafeteria | myorders</title>
+  <link rel="stylesheet" href="../frameworks/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body class="bg-light">
+  <div class="container mt-5">
+    <h1 class="my-4">My Orders</h1>
+    <div class="row">
+      <div class="col-md-12 col-lg myorder_data">
+        <div class="input-group">
+          <label for="date_from" class="input-group-text">Date from</label for="date_from">
+          <input type="date" id="date_from" class="form-control" title="date from" aria-label="date from"
+            aria-describedby="date_from">
+        </div>
+        <div class="input-group mt-3">
+          <label for="date_to" class="input-group-text">Date to</label for="date_to">
+          <input type="date" id="date_to" class="form-control" title="date to" aria-label="date to"
+            aria-describedby="date_to">
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg ">
+        <div class="items_wrapper row flex-nowrap g-0 gap-2">
+
+        </div>
+      </div>
+    </div>
+    <p class="mt-3 lead text-start">Total <span>EGP 104</span></p>
+    <hr>
+    <div class="row justify-content-center justify-content-lg-start">
+      <div class="myorder_card card mt-3 me-2 py-3 shadow-sm">
+        <a href="#" title="cancel" class="cancel_order btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
+        <div class="status badge bg-primary">Processing</div>
+        <img src="../images/coffee-cup.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="badge bg-secondary">20 EGP</div>
+          <div class="badge bg-info">04/03/2024 - 10:30 AM</div>
+        </div>
+      </div>
+
+      <div class="myorder_card card mt-3 me-2 py-3 shadow-sm">
+        <a href="#" title="cancel" class="cancel_order btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
+        <div class="status badge bg-warning">Out for delivery</div>
+        <img src="../images/rocket.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="badge bg-secondary">20 EGP</div>
+          <div class="badge bg-info">04/03/2024 - 10:30 AM</div>
+        </div>
+      </div>
+
+      <div class="myorder_card card mt-3 me-2 py-3 shadow-sm">
+        <a href="#" title="cancel" class="cancel_order btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
+        <div class="status badge bg-success">Done</div>
+        <img src="../images/verified.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="badge bg-secondary">20 EGP</div>
+          <div class="badge bg-info">04/03/2024 - 10:30 AM</div>
+        </div>
+      </div>
+      <div class="myorder_card card mt-3 me-2 py-3 shadow-sm">
+        <a href="#" title="cancel" class="cancel_order btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
+        <div class="status badge bg-success">Done</div>
+        <img src="../images/verified.gif" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="badge bg-secondary">20 EGP</div>
+          <div class="badge bg-info">04/03/2024 - 10:30 AM</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../frameworks/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+      let myorder_card = document.querySelectorAll('.myorder_card');
+      let items_wrapper = document.querySelector('.items_wrapper');
+      myorder_card.forEach((e) => {
+        e.addEventListener('click', function () {
+          items_wrapper.innerHTML = '';
+
+          let ordersItem = `
+      <div class="myorder_card-item shadow-sm row g-0">
+        <div>
+          <img src="../images/coffee-cup.gif" class="card-img-top" alt="...">
+          <p class="badge bg-primary item_title">Tea</p>
+        </div>
+        <div class="item-footer text-center d-flex justify-content-between">
+          <p class="badge bg-success">1</p>
+          <p class="badge bg-secondary m-0">EGP 999</p>
+        </div>
+      </div>
+    `;
+          for (let index = 0; index < 5; index++) {
+            items_wrapper.insertAdjacentHTML('beforeend', ordersItem);
+          }
+        })
+      });
+
+
+    </script>
+</body>
+
+</html>

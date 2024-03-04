@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.myorder_data {
+  height: 6rem;
+}
+.items_wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* width */
+.items_wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* Track */
+.items_wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.items_wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.items_wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.myorder_card-item {
+  position: relative;
+  background-color: white;
+  border-radius: 2px;
+  height: 6rem;
+  width: 8rem;
+  .item_title {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+  .item-footer {
+    position: absolute;
+    bottom: 0.25rem;
+    padding: 0 0.5rem;
+
+    p {
+      margin: 0;
+    }
+  }
+  img {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3rem;
+  }
+}
+.myorder_card {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border: none;
+  .status {
+    position: absolute;
+    border: none;
+    top: 0.25rem;
+    left: 0.25rem;
+  }
+  .cancel_order {
+    position: absolute;
+    right: 0.25rem;
+    top: 0.25rem;
+    padding: 0.1rem 0.5rem;
+  }
+  img {
+    margin-top: 0.75rem;
+    width: 3rem;
+  }
+  .card-body {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.myorder_card:hover {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
