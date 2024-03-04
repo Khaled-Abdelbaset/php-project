@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>users in console log</h2>
+    <div id="first"></div>
+
+    <script>
+        async function fetchusers(){
+
+
+
+            try {
+                let data=await fetch("http://localhost/project/adminAPI.php")
+                let da= await data.json();
+                console.log(da);
+            }
+            catch(err) {
+                document.getElementById("first").innerHTML = err.message;
+            }
+        
+            
+        }
+
+      
+        fetchusers();
+
+        
+    </script>
+</body>
+</html>
