@@ -1,8 +1,46 @@
+use cafeteria;
+
 -- rooms table
 
 create TABLE rooms 
 (id int AUTO_INCREMENT PRIMARY key,
  extNumber int);
+
+
+-- category table
+
+CREATE TABLE category 
+(  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(100) NOT NULL, 
+   PRIMARY KEY (id));
+
+
+
+-- product table
+
+CREATE TABLE product
+ (  id int(11) NOT NULL AUTO_INCREMENT,
+   imeg varchar(100) DEFAULT NULL, 
+    name varchar(100) NOT NULL, 
+     price int(11) DEFAULT NULL, 
+      category_id int(11) NOT NULL, 
+       PRIMARY KEY (id), 
+        KEY fk_category (category_id),  
+        CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (id));
+
+
+-- admin table
+
+CREATE TABLE admin 
+(  id int(11) NOT NULL AUTO_INCREMENT,
+  fname varchar(255) DEFAULT NULL, 
+   lname varchar(255) DEFAULT NULL,  
+   password varchar(255) DEFAULT NULL, 
+    email varchar(255) DEFAULT NULL,
+      img varchar(255) DEFAULT NULL,  
+      PRIMARY KEY (id),  
+      UNIQUE KEY email (email));
+
 
 -- emp table
 
@@ -28,37 +66,10 @@ CREATE TABLE orders
          PRIMARY KEY (id), 
          CONSTRAINT fk_orders_emp FOREIGN KEY (emp_id) REFERENCES emp (id));
 
--- category table
-
-CREATE TABLE category 
-(  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(100) NOT NULL, 
-   PRIMARY KEY (id));
 
 
--- product table
 
-CREATE TABLE product
- (  id int(11) NOT NULL AUTO_INCREMENT,
-   imeg varchar(100) DEFAULT NULL, 
-    name varchar(100) NOT NULL, 
-     price int(11) DEFAULT NULL, 
-      category_id int(11) NOT NULL, 
-       PRIMARY KEY (id), 
-        KEY fk_category (category_id),  
-        CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (id));
 
--- admin table
-
-CREATE TABLE admin 
-(  id int(11) NOT NULL AUTO_INCREMENT,
-  fname varchar(255) DEFAULT NULL, 
-   lname varchar(255) DEFAULT NULL,  
-   password varchar(255) DEFAULT NULL, 
-    email varchar(255) DEFAULT NULL,
-      img varchar(255) DEFAULT NULL,  
-      PRIMARY KEY (id),  
-      UNIQUE KEY email (email));
 
 -- order_details table
 
@@ -72,3 +83,49 @@ CREATE TABLE order_details
          CONSTRAINT c_order_ibfk_1 FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE,
            CONSTRAINT c_order_ibfk_2 FOREIGN KEY (drink) REFERENCES product (id) ON DELETE CASCADE);
 
+-- insert into rooms table
+INSERT INTO rooms (extNumber) VALUES
+(101),
+(102),
+(103);
+
+-- insert into category table
+
+INSERT INTO category (name) VALUES
+('Electronics'),
+('Clothing'),
+('Home Appliances');
+
+
+-- insert into product table
+
+INSERT INTO product (imeg, name, price, category_id) VALUES
+('laptop.jpg', 'Laptop', 1000, 1),
+('shirt.jpg', 'T-Shirt', 20, 2),
+('fridge.jpg', 'Refrigerator', 800, 3);
+
+-- insert into admin table
+
+INSERT INTO admin (fname, lname, password, email, img) VALUES
+('Admin', 'User', 'adminpass', 'admin@example.com', 'admin_image.jpg');
+
+-- insert into emp table
+
+INSERT INTO emp (fname, lname, password, email, img, room) VALUES
+('John', 'Doe', 'password123', 'john.doe@example.com', 'john_image.jpg', 1),
+('Jane', 'Smith', 'pass456', 'jane.smith@example.com', 'jane_image.jpg', 2),
+('Bob', 'Johnson', 'bobpass', 'bob.johnson@example.com', 'bob_image.jpg', 3);
+
+-- insert into orders table
+
+INSERT INTO orders (order_date, status, price, emp_id) VALUES
+('2024-03-04 12:00:00', 'processing', 50, 1),
+('2024-03-05 14:30:00', 'done', 75, 2),
+('2024-03-06 10:45:00', 'in delivery', 60, 3);
+
+-- insert into order_details table
+
+INSERT INTO order_details (order_id, drink, quantity, price) VALUES
+(1, 1, 2, 40),
+(2, 2, 3, 60),
+(3, 3, 1, 30);
