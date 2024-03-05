@@ -75,13 +75,13 @@ CREATE TABLE orders
 
 CREATE TABLE order_product
  (  order_id int(11) NOT NULL,
-   drink int(11) NOT NULL, 
+   product_id int(11) NOT NULL, 
     quantity int(11) NOT NULL, 
      price int(11) NOT NULL, 
-      PRIMARY KEY (order_id,drink),
-        KEY drink (drink), 
+      PRIMARY KEY (order_id,product_id),
+        KEY product_id (product_id), 
          CONSTRAINT c_order_ibfk_1 FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE,
-           CONSTRAINT c_order_ibfk_2 FOREIGN KEY (drink) REFERENCES product (id) ON DELETE CASCADE);
+           CONSTRAINT c_order_ibfk_2 FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE);
 
 -- insert into rooms table
 INSERT INTO rooms (extNumber) VALUES
@@ -125,9 +125,7 @@ INSERT INTO orders (order_date, status, price, customers_id) VALUES
 
 -- insert into order_product table
 
-INSERT INTO order_product (order_id, drink, quantity, price) VALUES
+INSERT INTO order_product (order_id, product_id, quantity, price) VALUES
 (1, 1, 2, 40),
 (2, 2, 3, 60),
 (3, 3, 1, 30);
-
-
