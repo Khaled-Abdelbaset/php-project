@@ -1,0 +1,74 @@
+-- rooms table
+
+create TABLE rooms 
+(id int AUTO_INCREMENT PRIMARY key,
+ extNumber int);
+
+-- emp table
+
+CREATE TABLE emp
+ (  id int(11) AUTO_INCREMENT NOT NULL,
+   fname varchar(255) DEFAULT NULL,
+     lname varchar(255) DEFAULT NULL,
+       password varchar(255) DEFAULT NULL, 
+        email varchar(255) DEFAULT NULL,
+          img varchar(255) DEFAULT NULL, room int(11) DEFAULT NULL,
+            PRIMARY KEY (id),FOREIGN KEY(room) REFERENCES rooms(id) , 
+             UNIQUE KEY email (email));
+
+
+-- orders table
+
+CREATE TABLE orders
+ (  id int(11) NOT NULL AUTO_INCREMENT, 
+  order_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status enum('processing','done','in delivery') DEFAULT NULL,
+      price int(11) DEFAULT NULL,
+        emp_id int(11) DEFAULT NULL,
+         PRIMARY KEY (id), 
+         CONSTRAINT fk_orders_emp FOREIGN KEY (emp_id) REFERENCES emp (id));
+
+-- category table
+
+CREATE TABLE category 
+(  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(100) NOT NULL, 
+   PRIMARY KEY (id));
+
+
+-- product table
+
+CREATE TABLE product
+ (  id int(11) NOT NULL AUTO_INCREMENT,
+   imeg varchar(100) DEFAULT NULL, 
+    name varchar(100) NOT NULL, 
+     price int(11) DEFAULT NULL, 
+      category_id int(11) NOT NULL, 
+       PRIMARY KEY (id), 
+        KEY fk_category (category_id),  
+        CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (id));
+
+-- admin table
+
+CREATE TABLE admin 
+(  id int(11) NOT NULL AUTO_INCREMENT,
+  fname varchar(255) DEFAULT NULL, 
+   lname varchar(255) DEFAULT NULL,  
+   password varchar(255) DEFAULT NULL, 
+    email varchar(255) DEFAULT NULL,
+      img varchar(255) DEFAULT NULL,  
+      PRIMARY KEY (id),  
+      UNIQUE KEY email (email));
+
+-- order_details table
+
+CREATE TABLE order_details
+ (  order_id int(11) NOT NULL,
+   drink int(11) NOT NULL, 
+    quantity int(11) NOT NULL, 
+     price int(11) NOT NULL, 
+      PRIMARY KEY (order_id,drink),
+        KEY drink (drink), 
+         CONSTRAINT c_order_ibfk_1 FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE,
+           CONSTRAINT c_order_ibfk_2 FOREIGN KEY (drink) REFERENCES product (id) ON DELETE CASCADE);
+
