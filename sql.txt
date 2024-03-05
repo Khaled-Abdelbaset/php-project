@@ -20,7 +20,7 @@ CREATE TABLE category
 
 CREATE TABLE product
  (  id int(11) NOT NULL AUTO_INCREMENT,
-   imeg varchar(100) DEFAULT NULL, 
+   img varchar(100) DEFAULT NULL, 
     name varchar(100) NOT NULL, 
      price int(11) DEFAULT NULL, 
       category_id int(11) NOT NULL, 
@@ -42,9 +42,9 @@ CREATE TABLE admin
       UNIQUE KEY email (email));
 
 
--- emp table
+-- customers table
 
-CREATE TABLE emp
+CREATE TABLE customers
  (  id int(11) AUTO_INCREMENT NOT NULL,
    fname varchar(255) DEFAULT NULL,
      lname varchar(255) DEFAULT NULL,
@@ -62,18 +62,18 @@ CREATE TABLE orders
   order_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status enum('processing','done','in delivery') DEFAULT NULL,
       price int(11) DEFAULT NULL,
-        emp_id int(11) DEFAULT NULL,
+        customers_id int(11) DEFAULT NULL,
          PRIMARY KEY (id), 
-         CONSTRAINT fk_orders_emp FOREIGN KEY (emp_id) REFERENCES emp (id));
+         CONSTRAINT fk_orders_customers FOREIGN KEY (customers_id) REFERENCES customers (id));
 
 
 
 
 
 
--- order_details table
+-- order_product table
 
-CREATE TABLE order_details
+CREATE TABLE order_product
  (  order_id int(11) NOT NULL,
    drink int(11) NOT NULL, 
     quantity int(11) NOT NULL, 
@@ -99,7 +99,7 @@ INSERT INTO category (name) VALUES
 
 -- insert into product table
 
-INSERT INTO product (imeg, name, price, category_id) VALUES
+INSERT INTO product (img, name, price, category_id) VALUES
 ('laptop.jpg', 'Laptop', 1000, 1),
 ('shirt.jpg', 'T-Shirt', 20, 2),
 ('fridge.jpg', 'Refrigerator', 800, 3);
@@ -109,23 +109,25 @@ INSERT INTO product (imeg, name, price, category_id) VALUES
 INSERT INTO admin (fname, lname, password, email, img) VALUES
 ('Admin', 'User', 'adminpass', 'admin@example.com', 'admin_image.jpg');
 
--- insert into emp table
+-- insert into customers table
 
-INSERT INTO emp (fname, lname, password, email, img, room) VALUES
+INSERT INTO customers (fname, lname, password, email, img, room) VALUES
 ('John', 'Doe', 'password123', 'john.doe@example.com', 'john_image.jpg', 1),
 ('Jane', 'Smith', 'pass456', 'jane.smith@example.com', 'jane_image.jpg', 2),
 ('Bob', 'Johnson', 'bobpass', 'bob.johnson@example.com', 'bob_image.jpg', 3);
 
 -- insert into orders table
 
-INSERT INTO orders (order_date, status, price, emp_id) VALUES
+INSERT INTO orders (order_date, status, price, customers_id) VALUES
 ('2024-03-04 12:00:00', 'processing', 50, 1),
 ('2024-03-05 14:30:00', 'done', 75, 2),
 ('2024-03-06 10:45:00', 'in delivery', 60, 3);
 
--- insert into order_details table
+-- insert into order_product table
 
-INSERT INTO order_details (order_id, drink, quantity, price) VALUES
+INSERT INTO order_product (order_id, drink, quantity, price) VALUES
 (1, 1, 2, 40),
 (2, 2, 3, 60),
 (3, 3, 1, 30);
+
+
